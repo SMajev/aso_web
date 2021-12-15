@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'aso_service.apps.AsoServiceConfig'
+    'aso_service.apps.AsoServiceConfig',
+    'accounts.apps.AccountsConfig'
 ]
 
 MIDDLEWARE = [

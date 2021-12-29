@@ -1,5 +1,13 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
+from .models import *
+
 
 class Index(TemplateView):
     template_name = 'index.html'
+
+class Services(ListView):
+    template_name = 'services.html'
+    model = Service
+    context_object_name = 'services'
+    

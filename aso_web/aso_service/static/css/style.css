@@ -6,9 +6,19 @@
   --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
 }
 
+h1  {
+  text-align: center;
+}
+
+#main-header {
+  top: 0px;
+  background-color: var(--dark);
+  color: var(--light);
+}
+
 html {
   box-sizing: border-box;
-  font-family: Arial, Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   color: var(--dark);
 }
 
@@ -16,6 +26,47 @@ body {
   background: #ccc;
   margin: 30px 50px;
   line-height: 1.4;
+}
+
+.head-container {
+  padding: 0.3%;
+  background-color: var(--dark);
+}
+
+
+.main-container {
+  position: relative;
+  top: 0px;
+  align-items: center;
+  margin: auto;
+  justify-self: center;
+  justify-content: center;
+  width: 92%;
+  padding: 4%;
+  background-color: rgb(153, 153, 153);
+}
+
+.main-container span {
+  font-size: 18px;
+}
+
+.main-container h1 {
+  background-color: var(--primary);
+  justify-content: center;
+  width: 60%;
+  margin: auto;
+  padding: 1%
+}
+
+.services {
+  background-color: lightgray;
+  margin: auto;
+  padding: 1%;
+  height: auto;
+  width: 98%;
+  text-align: center;
+  border: rgb(59, 59, 59) solid 2px;
+  table-layout: fixed;
 }
 
 
@@ -56,11 +107,13 @@ img {
   box-shadow: var(--shadow);
 }
 
-.top-container {
-  border: black solid ;
+.main-nav a:hover {
+  background-color: rgb(126, 126, 126);
+}
+
+.table-container {
   padding: 1%;
   margin: 1%;
-  border-bottom-style: dotted ;
 }
 
 .boxes {

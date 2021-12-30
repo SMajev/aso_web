@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1> Services </h1>
+    <div class='table-container'>
+        <table class='services'>
+            <thead>
+                <tr>
+                    <th scope='col'>#</th>
+                    <th scope='col'>Title</th>
+                    <th scope='col'>Time</th>
+                    <th scope='col'>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for service in services %}
+            <th scope='row'>{{ forloop.counter }} </th>
+            <td>
+                <span> {{ service.title }} </span>
+            </td>
+            <td>
+                <span> {{ service.time }} </span>
+            </td>
+            <td>
+                <span> {{ service.price }} </span>
+            </td>
+        </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock  %}

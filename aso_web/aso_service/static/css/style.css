@@ -51,11 +51,11 @@ div.index {
 /* ---------------Navbar--------------- */
 .dropdown {
   height: 10vh;
-  background: rgb(56, 56, 56);
+  width: 80%;
+  margin: auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
-
 }
 
 .account {
@@ -63,20 +63,52 @@ div.index {
 }
 
 .account ul {
+  padding: 0%;
+  margin-top: 10px;
   position: absolute;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  height: 200px;
   background: white;
+  left: 0px;
+  list-style: None;
+  border-radius: 5px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: all 1s ease;
 }
 
+.account li {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.account li:hover {
+  background-color: grey;
+}
 
-/* ---------------Services--------------- */
-.services {
-  background-color: lightgray;
-  margin: auto;
-  padding: 1%;
-  height: auto;
-  width: 98%;
-  text-align: center;
-  border: rgb(59, 59, 59) solid 2px;
-  table-layout: fixed;
+.account a, .dropdown a{
+  color: black;
+  text-decoration: None;
+}
+
+.dropdown button {
+  background: none;
+  text-decoration: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.account button:focus + ul {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0px);
 }
 

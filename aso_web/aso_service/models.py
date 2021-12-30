@@ -17,6 +17,8 @@ class Event(models.Model):
         ('V', 'In Progress'), ('X', 'Complete')
     )
     date = models.DateField()
+    car_id = models.CharField(max_length=15, blank=True)
+    car_model = models.CharField(max_length=15, blank=True)
     services = models.ManyToManyField(Service)
     raport = models.CharField(max_length=500, blank=True)
     created = models.DateTimeField(auto_now=True)

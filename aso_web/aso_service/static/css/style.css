@@ -82,6 +82,18 @@ body {
   box-shadow: var(--shadow);
 }
 
+.main-nav button {
+  background: #333;
+  display: block;
+  text-decoration: none;
+  padding: 0.8rem;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  box-shadow: var(--shadow);
+}
+
 .main-nav a:hover {
   background-color: rgb(126, 126, 126);
 }
@@ -93,4 +105,10 @@ body {
 
 div.index{
   text-align: center;
+
+}
+
+
+img {
+  margin: auto;
 }

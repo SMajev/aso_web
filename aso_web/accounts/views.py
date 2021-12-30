@@ -14,7 +14,7 @@ class CustomLogoutView(auth_views.LogoutView):
 
 
 class CustomerView(DetailView):
-    template_name = 'customer.html'
+    template_name = 'account/customer.html'
     model = Customer
     context_object_name = 'customer'
 

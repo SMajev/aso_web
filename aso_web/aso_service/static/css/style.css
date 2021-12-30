@@ -61,46 +61,7 @@ body {
   grid-gap: 20px;
 }
 
-nav.main-nav ul {
-  margin: 1%;
-  display: grid;
-  grid-gap: 20px;
-  padding: 0;
-  list-style: none;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-#nav-ul {
-  margin: 1%;
 
-}
-
-.main-nav a {
-  background: #333;
-  display: block;
-  text-decoration: none;
-  padding: 0.8rem;
-  text-align: center;
-  color: white;
-  text-transform: uppercase;
-  font-size: 1.1rem;
-  box-shadow: var(--shadow);
-}
-
-.main-nav button {
-  background: #333;
-  display: block;
-  text-decoration: none;
-  padding: 0.8rem;
-  text-align: center;
-  color: white;
-  text-transform: uppercase;
-  font-size: 1.1rem;
-  box-shadow: var(--shadow);
-}
-
-.main-nav a:hover {
-  background-color: rgb(126, 126, 126);
-}
 
 .table-container {
   padding: 1%;

@@ -7,45 +7,32 @@
 }
 
 body {
-  background: #ccc;
+  background: var(--primary);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.6em;
   margin: 0;
 }
 
-h1  {
-  text-align: center;
-}
-
 #main-header {
-  background-color: var(--dark);
+  background-color: rgb(54, 54, 54);
   color: var(--light);
 }
 
-html {
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--dark);
-}
-
-
-
 .head-container {
+  text-align: left;
   width: 80%;
   margin: auto;
   overflow: hidden;
 }
 
-
 .main-container {
-  position: relative;
-  top: 0px;
   align-items: center;
-  margin: auto;
   justify-self: center;
   justify-content: center;
-  width: 92%;
+  width: 88%;
+  margin-left: 2%;
+  margin-right: 2%;
   padding: 4%;
   background-color: rgb(153, 153, 153);
 }
@@ -84,12 +71,12 @@ html {
 }
 
 .main-nav a {
-  background: var(--primary);
+  background: #333;
   display: block;
   text-decoration: none;
   padding: 0.8rem;
   text-align: center;
-  color: var(--dark);
+  color: white;
   text-transform: uppercase;
   font-size: 1.1rem;
   box-shadow: var(--shadow);
@@ -102,4 +89,8 @@ html {
 .table-container {
   padding: 1%;
   margin: 1%;
+}
+
+div.index{
+  text-align: center;
 }

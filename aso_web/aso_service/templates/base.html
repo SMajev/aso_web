@@ -10,16 +10,22 @@
 <body>
     <header id='main-header'>
         <div class='head-container'>
-            <h1>ASO Service</h1>
+            <h1>Audi ASO</h1>
         </div>
     </header>
 
     <nav class='main-nav'>
         <ul>
             <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'index' %}">Client Panel</a></li>
+            <li><a href="{% url 'index' %}">About</a></li>
             <li><a href="{% url 'services' %}">Offer</a></li>
-            <li><a href="{% url 'index' %}">Contact</a></li>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'panel' pk=user.id %}">Hello, {{ user.username }}</a></li>
+            </div>
+            {% else %}
+                <li><a href="{% url 'index' %}">Log In</a></li>
+            {% endif %}
+
         </ul>
     </nav>
 

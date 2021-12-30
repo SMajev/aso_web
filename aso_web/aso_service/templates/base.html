@@ -13,38 +13,36 @@
             <h1>Audi ASO</h1>
         </div>
     </header>
-
-    <nav class='main-nav'>
-        <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'index' %}">About</a></li>
-            <li><a href="{% url 'services' %}">Offer</a></li>
+    <div>
+        <nav>
             <div class='dropdown'>
-                {% if request.user.is_authenticated %}
-                    <button>Hello, {{ user.username }}</button>
-                        <div class='profile'>
-                            <ul id='nav-ul'>
-                                <li><a href="{% url 'profile' pk=user.id %}">Profile</a></li>
-                                <li><a href="{% url 'profile' pk=user.id %}">My events</a></li>
-                                <li><a href="{% url 'logout' %}">Logout</a></li>
-                            </ul>
-                        </div>
-                
-                {% else %}
-                <button> Profile </button>
-                <div>
-                    <ul id='nav-ul'>
-                        <li><a href="{% url 'login' %}">Login</a></li>
-                        <li><a href="{% url 'index' %}">Sign-in</a></li>
-                    </ul>
+                <button><a href="{% url 'index' %}">Home</a></button>
+                <button><a href="{% url 'index' %}">About</a></button>
+                <button><a href="{% url 'services' %}">Services</a></button>
+                    <div class='account'>
+                        {% if request.user.is_authenticated %}
+                            <button>Hello, {{ user.username }}</button>
+                                <ul>
+                                    <li><a href="{% url 'profile' pk=user.id %}">Profile</a></li>
+                                    <li><a href="{% url 'profile' pk=user.id %}">My events</a></li>
+                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                </ul>
+                        {% else %}
+                            <button> Profile </button>
+                                <ul>
+                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                    <li><a href="{% url 'index' %}">Sign-in</a></li>
+                                </ul>
+                        {% endif %}
+                    </div>
                 </div>
-                {% endif %}
-            </div>
-        </ul>
-    </nav>
+        </nav>
+    </div>
 
     <div class='main-container'>
-            {% block content %}{% endblock %}
+            {% block content %}
+            {% endblock %}
     </div>
+
 </body>
 </html>

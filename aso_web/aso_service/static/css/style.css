@@ -6,6 +6,11 @@
   --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
 }
 
+/* ---------------General--------------- */
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: var(--primary);
   font-family: Arial, Helvetica, sans-serif;
@@ -14,37 +19,56 @@ body {
   margin: 0;
 }
 
+
+/* ---------------Header--------------- */
 #main-header {
-  background-color: rgb(54, 54, 54);
+  background-color: coral;
   color: var(--light);
 }
 
 .head-container {
   text-align: left;
-  width: 80%;
+  width: 75%;
   margin: auto;
   overflow: hidden;
 }
 
+
+/* ---------------Main container--------------- */
 .main-container {
   align-items: center;
-  justify-self: center;
-  justify-content: center;
-  width: 88%;
-  margin-left: 2%;
-  margin-right: 2%;
-  padding: 4%;
+  width: 70%;
+  margin: auto;
+  padding: 0%;
   background-color: rgb(153, 153, 153);
 }
 
-.main-container h1 {
-  background-color: var(--primary);
-  justify-content: center;
-  width: 60%;
-  margin: auto;
-  padding: 1%
+div.index {
+  text-align: center;
 }
 
+
+/* ---------------Navbar--------------- */
+.dropdown {
+  height: 10vh;
+  background: rgb(56, 56, 56);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.account {
+  position: relative;
+}
+
+.account ul {
+  position: absolute;
+  background: white;
+}
+
+
+/* ---------------Services--------------- */
 .services {
   background-color: lightgray;
   margin: auto;
@@ -56,26 +80,3 @@ body {
   table-layout: fixed;
 }
 
-.wrapper {
-  display: grid;
-  grid-gap: 20px;
-}
-
-
-
-.table-container {
-  padding: 1%;
-  margin: 1%;
-}
-
-div.index{
-  text-align: center;
-
-}
-
-
-
-
-img {
-  margin: auto;
-}

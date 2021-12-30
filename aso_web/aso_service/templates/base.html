@@ -22,13 +22,22 @@
             <div class='dropdown'>
                 {% if request.user.is_authenticated %}
                     <button>Hello, {{ user.username }}</button>
-                        <ul>
-                            <li><a href="{% url 'profile' pk=user.id %}">Hello, {{ user.username }}</a></li>
-                            <li><a href="{% url 'logout' %}">Logout</a></li>
-                        </ul>
+                        <div class='profile'>
+                            <ul id='nav-ul'>
+                                <li><a href="{% url 'profile' pk=user.id %}">Profile</a></li>
+                                <li><a href="{% url 'profile' pk=user.id %}">My events</a></li>
+                                <li><a href="{% url 'logout' %}">Logout</a></li>
+                            </ul>
+                        </div>
                 
                 {% else %}
-                    <li><a href="{% url 'login' %}">Log In</a></li>
+                <button> Profile </button>
+                <div>
+                    <ul id='nav-ul'>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="{% url 'index' %}">Sign-in</a></li>
+                    </ul>
+                </div>
                 {% endif %}
             </div>
         </ul>

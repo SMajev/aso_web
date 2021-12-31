@@ -8,9 +8,9 @@ from .models import *
 class CustomLoginView(auth_views.LoginView):
     template_name = 'login/login.html'
 
+
 class CustomLogoutView(auth_views.LogoutView):
     template_name = 'login/logout.html'
-
 
 
 class CustomerView(DetailView):
@@ -18,8 +18,9 @@ class CustomerView(DetailView):
     model = Customer
     context_object_name = 'customer'
 
+
 # class CustomerSignUp(CreateView):
 #     template_name = 'signup.html'
 #     success_url = reverse_lazy('login')
 #     form_class = CustomerForm
-    
+        

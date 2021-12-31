@@ -17,7 +17,7 @@
         <nav>
             <div class='dropdown'>
                 <button><a href="{% url 'index' %}">Home</a></button>
-                <button><a href="{% url 'index' %}">About</a></button>
+                <button><a href="{% url 'about' %}">About</a></button>
                 <button><a href="{% url 'services' %}">Services</a></button>
                 {% if request.user.is_authenticated %}
                     <div class='account'>

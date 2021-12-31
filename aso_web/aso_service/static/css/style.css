@@ -6,6 +6,11 @@
   --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
 }
 
+/* ---------------General--------------- */
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: var(--primary);
   font-family: Arial, Helvetica, sans-serif;
@@ -14,107 +19,106 @@ body {
   margin: 0;
 }
 
+
+/* ---------------Header--------------- */
 #main-header {
-  background-color: rgb(54, 54, 54);
+  background-color: coral;
   color: var(--light);
 }
 
 .head-container {
   text-align: left;
-  width: 80%;
+  width: 75%;
   margin: auto;
   overflow: hidden;
 }
 
+
+/* ---------------Main container--------------- */
 .main-container {
   align-items: center;
-  justify-self: center;
+  width: 70%;
+  margin: auto;
+  padding: 3%;
+  
+  background-color: rgb(65, 65, 65);
+}
+
+div.index {
+  text-align: center;
+}
+
+
+/* ---------------Navbar--------------- */
+.dropdown {
+  background-color: darkgrey;
+  height: 10vh;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.account {
+  position: relative;
+}
+
+.account ul {
+  padding: 0%;
+  margin-top: 10px;
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  background: white;
+  left: 0px;
+  list-style: None;
+  border-radius: 5px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 1s ease;
+}
+
+.account li {
+  width: 100%;
+  height: 100%;
+  display: flex;
   justify-content: center;
-  width: 88%;
-  margin-left: 2%;
-  margin-right: 2%;
-  padding: 4%;
-  background-color: rgb(153, 153, 153);
+  align-items: center;
+}
+.account li:hover {
+  background-color: grey;
 }
 
-.main-container h1 {
-  background-color: var(--primary);
-  justify-content: center;
-  width: 60%;
-  margin: auto;
-  padding: 1%
+.account a, .dropdown a{
+  color: black;
+  text-decoration: None;
 }
 
-.services {
-  background-color: lightgray;
-  margin: auto;
-  padding: 1%;
-  height: auto;
-  width: 98%;
-  text-align: center;
-  border: rgb(59, 59, 59) solid 2px;
-  table-layout: fixed;
-}
-
-.wrapper {
-  display: grid;
-  grid-gap: 20px;
-}
-
-nav.main-nav ul {
-  margin: 1%;
-  display: grid;
-  grid-gap: 20px;
-  padding: 0;
-  list-style: none;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-#nav-ul {
-  margin: 1%;
-
-}
-
-.main-nav a {
-  background: #333;
-  display: block;
+.dropdown button {
+  background: none;
   text-decoration: none;
-  padding: 0.8rem;
-  text-align: center;
-  color: white;
-  text-transform: uppercase;
-  font-size: 1.1rem;
-  box-shadow: var(--shadow);
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
 }
 
-.main-nav button {
-  background: #333;
-  display: block;
-  text-decoration: none;
-  padding: 0.8rem;
-  text-align: center;
-  color: white;
-  text-transform: uppercase;
-  font-size: 1.1rem;
-  box-shadow: var(--shadow);
+.account button:focus + ul {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0px);
+  
 }
 
-.main-nav a:hover {
-  background-color: rgb(126, 126, 126);
-}
-
-.table-container {
-  padding: 1%;
-  margin: 1%;
-}
-
-div.index{
-  text-align: center;
-
-}
-
-
-
-
-img {
+div.services {
+  align-items: center;
   margin: auto;
+  padding: 3%;
+}
+h1.services {
+  margin: auto;
+  padding: 3%;
 }

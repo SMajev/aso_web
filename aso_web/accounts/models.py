@@ -19,8 +19,6 @@ class Customer(models.Model):
         self.profile.delete()
         return super().delete(using, keep_parents)
 
-    def __str__(self):
-        return self.profile.username
 
 class Mechanic(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
@@ -28,7 +26,7 @@ class Mechanic(models.Model):
     def delete(self, using=None, keep_parents=False):
         self.profile.delete()
         return super().delete(using, keep_parents)
-        
+
     def __str__(self):
         return self.profile.username
 

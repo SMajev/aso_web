@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from accounts.models import Customer, Mechanic
 
 class Service(models.Model):
     title = models.CharField(max_length=128)
     describe = models.CharField(max_length=256)
     time = models.IntegerField()
     price = models.IntegerField()
-
     def __str__(self):
         return self.title
     
@@ -16,6 +15,7 @@ class Event(models.Model):
     STATUS_CHOICE = (
         ('V', 'In Progress'), ('X', 'Complete')
     )
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, default=None)
     date = models.DateField()
     car_id = models.CharField(max_length=15, blank=True)
     car_model = models.CharField(max_length=15, blank=True)

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE>
+<html lang-'eng'>
+<head>
+    <link rel='stylesheet' href="{%  static  'css/style.css'  %}">
+    <meta charset='utf-8'>
+    <meta name='viewport' content="width=device-width, initial-scale=1.0">
+    <title> ASO </title>
+</head>
+<body>
+
+    <header id='main-header'>
+        <div class='head-container'><h1>Audi ASO</h1></div>
+    </header>
+
+    <div>
+        <nav>
+            <div class='dropdown'>
+                <button><a href="{% url 'index' %}">Home</a></button>
+                <button><a href="{% url 'about' %}">About</a></button>
+                <button><a href="{% url 'services' %}">Services</a></button>
+                {% if request.user.is_authenticated %}
+                    <div class='account'>
+                        <button>Hello, {{ user.username }}</button>
+                            <ul>
+                                <li><a href="{% url 'profile' pk=user.id %}">Profile</a></li>
+                                <li><a href="{% url 'profile' pk=user.id %}">My events</a></li>
+                                <li><a href="{% url 'logout' %}">Logout</a></li>
+                            </ul>
+                    <div>
+                {% else %}
+                <div class='account'>
+                        <button> Profile </button>
+                            <ul>
+                                <li><a href="{% url 'login' %}">Login</a></li>
+                                <li><a href="{% url 'index' %}">Sign-in</a></li>
+                            </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class='main-container'>
+            {% block content %}
+            {% endblock %}
+    </div>
+
+</body>
+</html>

@@ -2,9 +2,11 @@
 
 {% block content %}
 
-<p>Name: {{ customer.name }}</p>
-<p>Surname: {{ customer.surname }}</p>
-<p>Pesel: {{ customer.pesel }}</p>
-<p>Email: {{ customer.email }}</p>
+
+<p>Username: {{ customer.profile.user.username }}</p>
+<p>Name: {{ customer.profile.user.first_name }}</p>
+<p>Surname: {{ customer.profile.user.last_name }}</p>
+<p>Pesel: {{ customer.profile.pesel }}</p>
+<p>Email: {{ customer.profile.user.email }}</p>
 
 {% endblock  %}

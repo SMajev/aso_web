@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<form method='POST'>
+
+    {% csrf_token %}
+    {{form.non_field_errors}}
+
+    <table>
+        <div>
+            <div>
+                {% for field in form  %}
+                
+                <stron>{{field.label_tag}}</strong>{{field}}
+                <br><br>
+                
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            {% if field.help_text %}
+                <p class='help'> {{field.help_text|safe}}
+            {% endif %}
+        </div>
+    </table>
+
+    <input type='submit' value='Submit'>
+
+</form>
+
+{% endblock  %}

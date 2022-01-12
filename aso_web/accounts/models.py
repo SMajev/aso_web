@@ -15,12 +15,20 @@ class Profile(models.Model):
 class Customer(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
 
+    def delete(self, using=None, keep_parents=False):
+        self.profile.delete()
+        return super().delete(using, keep_parents)
+
     def __str__(self):
-        return self.user.username
+        return self.profile.username
 
 class Mechanic(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
 
+    def delete(self, using=None, keep_parents=False):
+        self.profile.delete()
+        return super().delete(using, keep_parents)
+        
     def __str__(self):
-        return self.user.username
+        return self.profile.username
 

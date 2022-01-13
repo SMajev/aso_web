@@ -1,19 +1,54 @@
 from django import forms
-from .models import Customer, User, Profile
+from .models import Customer, User
+from django.db.transaction import atomic
+from django.contrib.auth.forms import UserCreationForm
 
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['email', 'username', 'password']
 
-class ProfileForm(forms.ModelForm):
-    class Meta(UserForm.Meta):
-        model = Profile
-        fields = '__all__'
+class CustomerRegistrationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        fields = ['email', 'username', 'first_name', 'last_name', 'password1', 'password2']
 
-class CustomerForm(forms.ModelForm):
-    class Meta(ProfileForm.Meta):
-        model = Customer
-        fields = '__all__'
+    email = forms.CharField(
+        widget=forms.EmailInput(
+            attrs={
+                'placeholder': 'Your email'
+            }
+        )
+    )
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your username'
+            }
+        )
+    )
+
+    first_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your name'
+            }
+        )
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your surname'
+            }
+        )
+    )
+    @atomic
+    def save(self, commit=True):
+        self.instance.is_active = True
+        user = super().save(commit)
+        customer = Customer(user=user)
+        if commit:
+            customer.save()
+        return user
+
+
+
+
+
 

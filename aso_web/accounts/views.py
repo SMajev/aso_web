@@ -3,7 +3,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from .models import *
-from .forms import CustomerForm
+from .forms import CustomerRegistrationForm
 
 
 class CustomLoginView(auth_views.LoginView):
@@ -23,5 +23,5 @@ class CustomerView(DetailView):
 class CustomerSignUp(CreateView):
     template_name = 'login/signup.html'
     success_url = reverse_lazy('login')
-    form_class = CustomerForm
+    form_class = CustomerRegistrationForm
         

@@ -20,6 +20,9 @@ class Mechanic(models.Model):
         self.profile.delete()
         return super().delete(using, keep_parents)
 
+    def __str__(self):
+        return self.user.username
+    
 
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -28,4 +31,7 @@ class Admin(models.Model):
         self.profile.delete()
         return super().delete(using, keep_parents)
 
+    def __str__(self):
+        return self.user.username
+    
 

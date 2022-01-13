@@ -23,3 +23,8 @@ class EventCreateView(FormView):
     template_name = 'event_create.html'
     form_class = EventForm
     success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        form.instance.customer = self.request.user.customer
+        form.save()
+        return super().form_valid(form)

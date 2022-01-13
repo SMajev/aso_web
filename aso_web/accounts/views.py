@@ -25,6 +25,12 @@ class CustomerSignUp(CreateView):
     success_url = reverse_lazy('login')
     form_class = CustomerRegistrationForm
 
+
+class MechanicView(DetailView):
+    template_name = 'account/customer.html'
+    model = Mechanic
+    context_object_name = 'customer'
+
 class MechanicSignUp(CreateView):
     template_name = 'login/signup.html'
     success_url = reverse_lazy('login')

@@ -6,3 +6,6 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = ['date', 'car_id', 'car_model', 'services']
 
+
+
+

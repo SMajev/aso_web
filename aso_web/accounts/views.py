@@ -1,5 +1,5 @@
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from .models import *
@@ -37,3 +37,8 @@ class MechanicSignUp(CreateView):
     success_url = reverse_lazy('login')
     form_class = MechanicRegistrationForm
         
+class AccountUpdate(UpdateView):
+    template_name = 'login/signup.html'
+    model = User
+    success_url = reverse_lazy('login')
+    form_class = MechanicRegistrationForm

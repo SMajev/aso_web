@@ -22,9 +22,13 @@
                 {% if request.user.is_authenticated %}
                     <div class='account'>
                         <button>Hello, {{ user.username }}</button>
-                            <ul>
+                             <ul>
                                 <li><a href="{% url 'profile' pk=user.id %}">Profile</a></li>
-                                <li><a href="{% url 'profile' pk=user.id %}">My events</a></li>
+                                {% if request.user.mechanic %}
+                                    <li><a href="{% url 'mevents' %}">My events</a></li>
+                                {% else %}
+                                    <li><a href="{% url 'events' %}">My events</a></li>
+                                {% endif %}
                                 <li><a href="{% url 'logout' %}">Logout</a></li>
                             </ul>
                     <div>
@@ -33,8 +37,8 @@
                         <button> Profile </button>
                             <ul>
                                 <li><a href="{% url 'login' %}">Login</a></li>
-                                <li><a href="{% url 'signup' %}">Customer Sign-in</a></li>
-                                <li><a href="{% url 'msignup' %}">Mechanic Sign-in</a></li>
+                                <li><a href="{% url 'signup' %}">Customer Sign-up</a></li>
+                                <li><a href="{% url 'msignup' %}">Mechanic Sign-up</a></li>
                             </ul>
                     {% endif %}
                 </div>

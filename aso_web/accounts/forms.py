@@ -37,6 +37,7 @@ class CustomerRegistrationForm(UserCreationForm):
             }
         )
     )
+
     @atomic
     def save(self, commit=True):
         self.instance.is_active = True

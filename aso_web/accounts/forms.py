@@ -23,7 +23,6 @@ class CustomerRegistrationForm(UserCreationForm):
             }
         )
     )
-
     first_name = forms.CharField(
         widget=forms.TextInput(
             attrs={

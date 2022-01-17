@@ -16,7 +16,7 @@ class CustomLogoutView(auth_views.LogoutView):
 
 class CustomerView(DetailView):
     template_name = 'account/customer.html'
-    model = Customer
+    model = User
     context_object_name = 'customer'
 
 
@@ -30,6 +30,7 @@ class MechanicView(DetailView):
     template_name = 'account/customer.html'
     model = Mechanic
     context_object_name = 'customer'
+
 
 class MechanicSignUp(CreateView):
     template_name = 'login/signup.html'

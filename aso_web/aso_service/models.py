@@ -16,10 +16,17 @@ class Event(models.Model):
     STATUS_CHOICE = (
         ('V', 'In Progress'), ('X', 'Complete')
     )
+    CAR_MODEL_CHOICE = (
+        ('X', 'Unknown'), ('A1', 'A1'), ('A2', 'A2'),
+        ('A3','A3'), ('A4','A4'), ('A5', 'A5'), ('A6','A6'), 
+        ('A7','A7'), ('80', '80'), ('90', '90'), ('100', '100'),
+        ('200', '200')
+    )
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    machanic = models.ForeignKey(Mechanic, on_delete=models.DO_NOTHING, blank=True)
     date = models.DateField()
     car_id = models.CharField(max_length=15)
-    car_model = models.CharField(max_length=15)
+    car_model = models.CharField(max_length=15, choices=CAR_MODEL_CHOICE, default=CAR_MODEL_CHOICE[0][0])
     services = models.ManyToManyField(Service)
     raport = models.CharField(max_length=500)
     created = models.DateTimeField(auto_now=True)

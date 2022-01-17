@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p><strong>Date:</strong> {{event.date}}</p>
+<p><strong>Customer:</strong> {{event.customer}}</p>
+<p><strong>Mechanic:</strong> {{event.mechanic}}</p>
+<p><strong>Car ID</strong> {{event.car_id}}</p>
+<p><strong>Car Model:</strong> {{event.car_model}}</p>
+<p><strong>Services:</strong> 
+    <ul>
+        {% for service in event.services.all %}
+            <li>{{service.title}}</li>
+        {% endfor %}
+    </ul>
+</p>
+<p><strong>Raport:</strong> {{event.raport}}</p>
+<p><strong>Status:</strong> {{event.status}}</p>
+
+{% endblock  %}

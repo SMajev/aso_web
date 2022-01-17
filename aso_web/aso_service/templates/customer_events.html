@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th scope='col'>#</th>
+                <th scope='col'>Mechanic</th>
+                <th scope='col'>Date</th>
+                <th scope='col'>Car ID</th>
+                <th scope='col'>Car Model</th>
+                <th scope='col'>Services</th>
+                <th scope='col'>Raport</th>
+                <th scope='col'>Created</th>
+                <th scope='col'>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+                <tr>
+                    <td><span>{{event.id}}</span></td>
+                    <td><span>{{event.mechanic}}</span></td>
+                    <td><span>{{event.date}}</span></td>
+                    <td><span>{{event.car_id}}</span></td>
+                    <td><span>{{event.car_model}}</span></td>
+                    <td><span>{{event.services}}</span></td>
+                    <td><span>{{event.raport}}</span></td>
+                    <td><span>{{event.created}}</span></td>
+                    <td><span>{{event.status}}</span></td>
+                    <td><button type='button'><a href="{% url 'event-detail' pk=event.id%}">View</a></button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        <button type='button'><a href="{% url 'event-create' %}">Add Event</a></button>
+    </div>
+</div>
+
+{% endblock  %}

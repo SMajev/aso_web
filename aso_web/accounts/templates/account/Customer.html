@@ -3,10 +3,10 @@
 {% block content %}
 
 
-<p>Username: {{ customer.profile.user.username }}</p>
-<p>Name: {{ customer.profile.user.first_name }}</p>
-<p>Surname: {{ customer.profile.user.last_name }}</p>
-<p>Pesel: {{ customer.profile.pesel }}</p>
-<p>Email: {{ customer.profile.user.email }}</p>
+<p>Username: {{ user.username }}</p>
+<p>Name: {{ user.first_name }}</p>
+<p>Surname: {{ user.last_name }}</p>
+<p>Pesel: {{ user.pesel }}</p>
+<p>Email: {{ user.email }}</p>
 
 {% endblock  %}

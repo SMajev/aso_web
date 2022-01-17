@@ -1,9 +1,9 @@
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from .models import *
-from .forms import CustomerForm
+from .forms import CustomerRegistrationForm, MechanicRegistrationForm
 
 
 class CustomLoginView(auth_views.LoginView):
@@ -16,12 +16,29 @@ class CustomLogoutView(auth_views.LogoutView):
 
 class CustomerView(DetailView):
     template_name = 'account/customer.html'
-    model = Customer
+    model = User
     context_object_name = 'customer'
 
 
 class CustomerSignUp(CreateView):
     template_name = 'login/signup.html'
     success_url = reverse_lazy('login')
-    form_class = CustomerForm
+    form_class = CustomerRegistrationForm
+
+
+class MechanicView(DetailView):
+    template_name = 'account/customer.html'
+    model = Mechanic
+    context_object_name = 'customer'
+
+
+class MechanicSignUp(CreateView):
+    template_name = 'login/signup.html'
+    success_url = reverse_lazy('login')
+    form_class = MechanicRegistrationForm
         
+class AccountUpdate(UpdateView):
+    template_name = 'login/signup.html'
+    model = User
+    success_url = reverse_lazy('login')
+    form_class = MechanicRegistrationForm

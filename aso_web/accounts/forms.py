@@ -1,19 +1,95 @@
 from django import forms
-from .models import Customer, User, Profile
+from .models import Customer, User, Mechanic
+from django.db.transaction import atomic
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
 
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['email', 'username', 'password']
+class CustomerRegistrationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        fields = ['email', 'username', 'first_name', 'last_name', 'password1', 'password2']
 
-class ProfileForm(forms.ModelForm):
-    class Meta(UserForm.Meta):
-        model = Profile
-        fields = '__all__'
+    email = forms.CharField(
+        widget=forms.EmailInput(
+            attrs={
+                'placeholder': 'Your email'
+            }
+        )
+    )
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your username'
+            }
+        )
+    )
+    first_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your name'
+            }
+        )
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your surname'
+            }
+        )
+    )
 
-class CustomerForm(forms.ModelForm):
-    class Meta(ProfileForm.Meta):
-        model = Customer
-        fields = '__all__'
+    @atomic
+    def save(self, commit=True):
+        self.instance.is_active = True
+        user = super().save(commit)
+        customer = Customer(user=user)
+        customer.user.groups.add(Group.objects.get(name='Mechanic'))
+        if commit:
+            customer.save()
+        return user
+
+
+
+class MechanicRegistrationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        fields = ['email', 'username', 'first_name', 'last_name', 'password1', 'password2']
+
+    email = forms.CharField(
+        widget=forms.EmailInput(
+            attrs={
+                'placeholder': 'Your email'
+            }
+        )
+    )
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your username'
+            }
+        )
+    )
+    first_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your name'
+            }
+        )
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your surname'
+            }
+        )
+    )
+    @atomic
+    def save(self, commit=True):
+        self.instance.is_active = True
+        user = super().save(commit)
+        mechanic = Mechanic(user=user)
+        mechanic.user.groups.add(Group.objects.get(name='Mechanic'))
+        if commit:
+            mechanic.save()
+        return user
+
 

@@ -14,7 +14,9 @@ class Service(models.Model):
      
 class Event(models.Model):
     STATUS_CHOICE = (
-        ('X', 'In Progress'), ('V', 'Complete')
+        ('Draft', 'Draft'), 
+        ('In Progress', 'In Progress'),
+        ('Complete', 'Complete')
     )
     CAR_MODEL_CHOICE = (
         ('X', 'Unknown'), ('A1', 'A1'), ('A2', 'A2'),

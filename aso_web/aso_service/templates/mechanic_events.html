@@ -13,8 +13,6 @@
                 <th scope='col'>Date</th>
                 <th scope='col'>Car ID</th>
                 <th scope='col'>Car Model</th>
-                <th scope='col'>Services</th>
-                <th scope='col'>Raport</th>
                 <th scope='col'>Created</th>
                 <th scope='col'>Status</th>
             </tr>
@@ -28,8 +26,6 @@
                     <td><span>{{event.date}}</span></td>
                     <td><span>{{event.car_id}}</span></td>
                     <td><span>{{event.car_model}}</span></td>
-                    <td><span>{{event.services}}</span></td>
-                    <td><span>{{event.raport}}</span></td>
                     <td><span>{{event.created}}</span></td>
                     <td><span>{{event.status}}</span></td>
                     <td><button type='button'><a href="{% url 'event-detail' pk=event.id%}">View</a></button></td>

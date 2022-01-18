@@ -25,7 +25,7 @@ class Event(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     mechanic = models.ForeignKey(Mechanic, on_delete=models.DO_NOTHING, null=True, blank=True)
     date = models.DateField()
-    ttd = models.IntegerField(null=True, blank=True)
+    ttd = models.IntegerField(default=0)
     enddate = models.DateField(null=True, blank=True)
     car_id = models.CharField(max_length=15)
     car_model = models.CharField(max_length=15, choices=CAR_MODEL_CHOICE, default=CAR_MODEL_CHOICE[0][0])

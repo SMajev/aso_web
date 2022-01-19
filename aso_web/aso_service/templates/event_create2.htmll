@@ -17,7 +17,7 @@
             {% endfor %}
         </div>
     </table>
-    <input type='submit' value='Submit' pk=event.pk>
+    <input type='submit' value='Submit'>
 </form>
 
 {% endblock  %}

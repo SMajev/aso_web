@@ -3,7 +3,10 @@
 {% block content %}
 
 <p><strong>Date:</strong> {{event.date}}</p>
-<p><strong>Customer:</strong> {{event.customer}}</p>
+<p><strong>Customer username:</strong> {{event.customer}}</p>
+<p><strong>Customer Name & Surname:</strong>
+    {{event.customer.user.first_name}} {{event.customer.user.last_name}}
+</p>
 <p><strong>Mechanic:</strong> {{event.mechanic}}</p>
 <p><strong>Car ID</strong> {{event.car_id}}</p>
 <p><strong>Car Model:</strong> {{event.car_model}}</p>
@@ -19,4 +22,6 @@
 <p><strong>Raport:</strong> {{event.raport}}</p>
 <p><strong>Status:</strong> {{event.status}}</p>
 
+<button type='button'><a href="{% url 'event-update' pk=event.id%}">Update</a></button>
+<button type='button'><a href="{% url 'event-delete' pk=event.id%}">Delete</a></button>
 {% endblock  %}

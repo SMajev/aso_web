@@ -2,6 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from accounts.models import Customer, Mechanic
 
+class Station(models.Model):
+    name = models.CharField(max_length=20, default='Position')
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+    def __str__(self):
+        return self.name
+    
 
 class Service(models.Model):
     title = models.CharField(max_length=128)
@@ -26,9 +34,10 @@ class Event(models.Model):
     )
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     mechanic = models.ForeignKey(Mechanic, on_delete=models.DO_NOTHING, null=True, blank=True)
-    date = models.DateField()
+    station = models.ForeignKey(Station, on_delete=models.DO_NOTHING, null=True, blank=True)
+    date = models.DateTimeField(null=True, blank=True)
     ttd = models.IntegerField(default=0)
-    enddate = models.DateField(null=True, blank=True)
+    enddate = models.DateTimeField(null=True, blank=True)
     car_id = models.CharField(max_length=15)
     car_model = models.CharField(max_length=15, choices=CAR_MODEL_CHOICE, default=CAR_MODEL_CHOICE[0][0])
     services = models.ManyToManyField(Service)
@@ -37,5 +46,6 @@ class Event(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICE, default=STATUS_CHOICE[0][0])
     
     def __str__(self):
-        return str(self.pk)
+        return f'ID: {str(self.pk)}, Customer: {self.customer}, Mechanic: {self.mechanic}, Station: {self.station}'
+
     

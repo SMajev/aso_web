@@ -24,7 +24,7 @@ class EventFormII(forms.ModelForm):
         model = Event
         fields = ['date']
 
-    # date = forms.MultipleChoiceField()
+    date = forms.ChoiceField()
 
     # def __init__(self, *args, **kwargs):
     #     super(EventFormII, self).__init__(*args, **kwargs)

@@ -17,7 +17,7 @@ class Service(models.Model):
     time = models.IntegerField()
     price = models.IntegerField()
     def __str__(self):
-        return self.title
+        return f"{self.title}, Time: {self.time}h, Price:{self.price}$"
     
      
 class Event(models.Model):

@@ -44,7 +44,6 @@ class EventCreate(CreateView):
         event = form.save()
         for service in form.cleaned_data.get('services'):
             event.ttd += service.time
-
         return super().form_valid(form)
 
     def get_success_url(self, **kwargs):
@@ -57,41 +56,66 @@ class EventCreateII(UpdateView):
     model = Event
     success_url = reverse_lazy('index')
 
+    def datespan(self):
+        today = datetime.datetime.now()
+        delta1 = datetime.timedelta(days=7)
+        delta2 = datetime.timedelta(days=1)
+        later = today + delta1
+        current_day = today
+        while current_day < later:
+            yield current_day.strftime('%d/%m/%y')
+            current_day += delta2
+
+    def date_converter(self, string, time):
+        ddate =  datetime.datetime.strptime(string, '%d/%m/%y')
+        book_day_time = datetime.datetime.combine(ddate, time)
+        return (book_day_time, f"{book_day_time}")
+
+    def datetime_dejavu_controler(self, date, datetime_list):
+        return date not in datetime_list
+            
     def check_availability(self, new_event):
         stations = Station.objects.all()
         avail_list = []
-        hours = [(datetime.time(i).strftime('%I')) for i in range(6, 18)]
-        for station in stations:
-            events = Event.objects.filter(station=station)
-            if len(events) > 0:
-                for i in range(len(events)):
-                    for j in range(i+1, len(events)):
-                        print(j)
-                        if datetime.timedelta(hours=new_event.ttd) < (events[j].date - events[i].enddate):
-                            avail_list.append(events[i].enddate)
+        for day in self.datespan():
+            for station in stations:
+                events = Event.objects.filter(station=station)
+                if len(events) > 0:
+                    for i in range(len(events)):
+                        for j in range(i+1, len(events)):
+                            if datetime.timedelta(hours=new_event.ttd) < (events[j].date - events[i].enddate):
+                                book_day_time = datetime.strptime(day, events[i].enddate.strftime('%d/%m/%y %H:%M'))
 
-                        else:
-                            continue       
-            else:
-                avail_list.append(station.start_time)
+                                avail_list.append((events[i].enddate), f"{events[i].enddate.strftime('%d/%m/%y %H:%M')}")
 
-        print(f'Dostępny termin: {avail_list}')
+                            else:
+                                continue       
+                else:
+                    book_day_time = self.date_converter(day ,station.start_time)
+                    print(book_day_time)
+                    print(avail_list)
+                    if self.datetime_dejavu_controler(book_day_time, avail_list) is True:
+                        avail_list.append(book_day_time)
+
         return avail_list
 
-    def get_initial(self):
-        initial = super(EventCreateII, self).get_initial()
-        form = self.form
-        # initial['date'] = self.check_availability(self.object)
-        form['date'].choices = self.check_availability(self.object)
-        return initial
 
+    def get_form(self):
+        form = super().get_form()
+        form.fields['date'].choices = self.check_availability(self.get_object())
+        return form
 
-    def form_valid(self, form):   
-        start_date = form.cleaned_data.get('date')
+    def form_valid(self, form):
+        form.instance.customer = self.request.user.customer   
         event = form.save()
+        start_date = form.cleaned_data.get('date')
         event.enddate = start_date + timedelta(hours=event.ttd)
-        form.save()
+        # form.save()
+        print(event)
         return super().form_valid(form)
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('index')
 
 
 # ------------------------ Event Customer ------------------------

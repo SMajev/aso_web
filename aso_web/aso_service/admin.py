@@ -3,4 +3,5 @@ from .models import *
 
 admin.site.register(Service)
 admin.site.register(Event)
+admin.site.register(Station)
 

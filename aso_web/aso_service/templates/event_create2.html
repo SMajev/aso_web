@@ -6,7 +6,7 @@
 
     {% csrf_token %}
     {{form.non_field_errors}}
-
+    
     <table>
         <div>
             {% for field in form %}
@@ -17,7 +17,7 @@
             {% endfor %}
         </div>
     </table>
-    <input type='submit' value='Submit' pk=event.pk>
+    <input type='submit' value='Submit'>
 </form>
 
 {% endblock  %}

@@ -26,6 +26,7 @@ class EventFormII(forms.ModelForm):
 
     date = forms.ChoiceField()
 
+
     # def __init__(self, *args, **kwargs):
     #     super(EventFormII, self).__init__(*args, **kwargs)
     #     self.fields["date"].initial = 
@@ -38,6 +39,6 @@ class ManagerEventForm(forms.ModelForm):
 class MechanicRaportForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['raport', 'status']
+        fields = ['raport']
 
     raport = forms.CharField(widget=forms.Textarea(attrs={'rows':5, 'cols':30, 'style':'resize:none'}), required=False, )

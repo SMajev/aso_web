@@ -87,7 +87,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+from warnings import filterwarnings
+filterwarnings('ignore', message=r'.*received a naive datetime')
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

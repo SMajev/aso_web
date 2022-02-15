@@ -28,7 +28,8 @@
                     <td><span>{{event.created}}</span></td>
                     <td><span>{{event.status}}</span></td>
                     <td><button type='button'><a href="{% url 'event-detail' pk=event.id%}">View</a></button></td>
-                    
+                    <td><button type='button'><a href="{% url 'event-update' pk=event.id%}">Update</a></button></td>
+                    <td><button type='button'><a href="{% url 'event-delete' pk=event.id%}">Delete</a></button></td>
                 </tr>
             {% endfor %}
         </tbody>

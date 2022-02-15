@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from .models import *
 from .forms import CustomerRegistrationForm, MechanicRegistrationForm
 
+# ------------------------ Customer ------------------------
 
 class CustomLoginView(auth_views.LoginView):
     template_name = 'login/login.html'
@@ -26,6 +27,9 @@ class CustomerSignUp(CreateView):
     form_class = CustomerRegistrationForm
 
 
+
+# ------------------------ Mechaqnic ------------------------
+
 class MechanicView(DetailView):
     template_name = 'account/customer.html'
     model = Mechanic
@@ -37,6 +41,7 @@ class MechanicSignUp(CreateView):
     success_url = reverse_lazy('login')
     form_class = MechanicRegistrationForm
         
+
 class AccountUpdate(UpdateView):
     template_name = 'login/signup.html'
     model = User

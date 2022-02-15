@@ -5,7 +5,7 @@ from .models import *
 from .forms import *
 from accounts.models import *
 from django.urls import reverse_lazy
-from datetime import timedelta  
+import datetime as dt
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.utils import timezone
 from django.utils.timezone import make_aware
@@ -39,11 +39,15 @@ class EventCreate(CreateView):
     form_class = EventForm
     success_url = reverse_lazy('event-create2')
 
-    def form_valid(self, form):   
-        form.instance.customer = self.request.user.customer
-        event = form.save()
-        for service in form.cleaned_data.get('services'):
-            event.ttd += service.time
+    def form_valid(self, form):
+        self.event = form.save(commit=False)   
+        self.event.customer = self.request.user.customer
+        self.event.event_booker = EventBooker.objects.create()
+        self.event.save()
+        for service in self.event.services.all():
+            event.duration += service.time
+
+        self.event.save()
         return super().form_valid(form)
 
     def get_success_url(self, **kwargs):
@@ -57,9 +61,9 @@ class EventCreateII(UpdateView):
     success_url = reverse_lazy('index')
 
     def datespan(self):
-        today = datetime.datetime.today()
-        delta1 = datetime.timedelta(days=14)
-        delta2 = datetime.timedelta(days=1)
+        today = dt.datetime.today()
+        delta1 = dt.timedelta(days=5)
+        delta2 = dt.timedelta(days=1)
         later = today + delta1
         current_day = today
         while current_day < later:
@@ -70,87 +74,67 @@ class EventCreateII(UpdateView):
                 current_day += delta2
 
     def datetime_dejavu_controler(self, date, datetime_list):
-        if date not in datetime_list:
-            return True
+        if date in datetime_list:
+            return False
+
+    def final_tuple_append(self, data, my_list):
+        print((data, data))
+        my_list.append((data, data))
+
+    def spread_maker(self, current_time, end_time, one_hour):
+        spread = []
+        while current_time != end_time:
+            spread.append(current_time)
+            current_time += one_hour
+        return spread
+
 
     def date_converter(self, event):
+        print(event)
         if type(event) != str:
-            event_start_pre = event.date.strftime('%Y-%m-%d %H:%M:%S')
-            event_end_pre = event.enddate.strftime('%Y-%m-%d %H:%M:%S')
-            event_start = datetime.datetime.strptime(event_start_pre,'%Y-%m-%d %H:%M:%S')
-            event_end = datetime.datetime.strptime(event_end_pre, '%Y-%m-%d %H:%M:%S')
+            event_start_pre = event.date.strftime('%d-%m-%Y %H:%M:%S')
+            event_end_pre = event.enddate.strftime('%d-%m-%Y %H:%M:%S')
+            event_start = dt.datetime.strptime(event_start_pre,'%d-%m-%Y %H:%M:%S')
+            event_end = dt.datetime.strptime(event_end_pre, '%d-%m-%Y %H:%M:%S')
             return (event_start, event_end)
-        else:
-            print(type(event))
-            datetime_object = datetime.datetime.strptime(event,'%Y-%m-%d %H:%M:%S')
-            return datetime_object
+        # else:
+        #     print(type(event))
+        #     datetime_object = datetime.datetime.strptime(event,'%d-%m-%Y %H:%M:%S')
+        #     return datetime_object
+
+    # def Controler_I(self):
 
     def check_availability(self, new_event):
-        stations = Station.objects.all()
+        stations = EventBooker.station.objects.all()
         avail_list = []
         aso_open = 6
-        aso_closed = 18
         hours_of_work = 10
     
         for day in self.datespan():
-
-
             for station in stations:
                 start_time = day.replace(day=day.day,hour=aso_open, minute=0, second=0, microsecond=0)
-                end_time = start_time + datetime.timedelta(hours=hours_of_work)
                 current_time = start_time
-                one_hour = datetime.timedelta(hours=1)
-                events = Event.objects.filter(station=station, date=current_time)                
-                time_of_work = end_time - start_time
+                one_hour = dt.timedelta(hours=1)
+                end_time = start_time + dt.timedelta(hours=hours_of_work)
+                time_of_work = end_time - start_time  
+                duration = dt.timedelta(hours=new_event.ttd)
+                spread = self.spread_maker(current_time, end_time, one_hour)
+                loop_on = True
                 free_hours = 0
-                spread = []
-                new_event_ttd = new_event.ttd
-                while current_time != end_time:
-                    spread.append(current_time)
-                    current_time += one_hour
-
+                events = Event.objects.filter(station=station)
+                print('\n\n\n\n\n\n')
+                print(events)
                 for now_hour in spread:
-                    print(now_hour)
-                    if 0  < len(events):
-                        for event in events:
-                            event_start, event_end = self.date_converter(event)
-                            if now_hour == event_end:
-                                if self.datetime_dejavu_controler(event_end, avail_list):
-                                    avail_list.append((now_hour, now_hour))
-                    elif free_hours == new_event_ttd:
-                        open_hour = now_hour + datetime.timedelta(hours=new_event_ttd)
-                        if self.datetime_dejavu_controler(event_end, avail_list):
-                                    avail_list.append((open_hour, open_hour))   
-                    else:
-                        free_hours += 1
-                        print(free_hours)
+                    if (len(events) > 1) and ((now_hour + duration) <= end_time):
+                        for i in range(len(events)):
+                            for j in range(i+1, len(events)-1):
+                                event_start, event_end = self.date_converter(event[i])
+                                print(event_start, event_end)
+                                if (duration <= (event_start - start_time)) or (duration <= (next_event - event_start)):
+                                    if self.datetime_dejavu_controler(now_hour, spread):
+                                        self.final_tuple_append(now_hour, avail_list)
+                                        
 
-        print(avail_list)
-
-
-                    
-                    # 
-                    # for event in schedule:
-                    #     if event:
-                    #         end_event = event.enddate
-                    #         if new_event_ttd <= (start_time - end_time):
-                    #             avail_list.append((end_event, end_event))
-                    #     elif None:
-                    #         free_hours += 1
-                    #         if free_hours == new_event_ttd:
-                    #             avail_list.append((end_time, end_time))
-
-
-                            # if datetime.timedelta(hours=new_event_ttd) <= (start_time - end_time):
-                                
-                            #     if self.datetime_dejavu_controler(end_time, avail_list):
-                            #         avail_list.append((end_time, end_time))
-                            #         dattee = day.replace(hour=datetime.timedelta(hours=(clock + 1)))
-                            #         hours -= new_event_ttd
-
-
-
-                    
 
 
         return avail_list
@@ -158,8 +142,9 @@ class EventCreateII(UpdateView):
 
     def get_form(self):
         form = super().get_form() 
-        # avail_list, station = 
-        form.fields['date'].choices = self.check_availability(self.get_object())
+        avail_list = self.check_availability(self.get_object())
+        form.fields['date'].choices = avail_list
+        
         return form
 
     def form_valid(self, form):
@@ -167,6 +152,7 @@ class EventCreateII(UpdateView):
         event = form.save()
         start_date = form.cleaned_data.get('date')
         event.enddate = self.date_converter(start_date) + timedelta(hours=event.ttd)
+        # position = event.cleaned_data.get('size')
         # form.save()
         print(event)
         return super().form_valid(form)

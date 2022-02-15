@@ -1,36 +1,21 @@
 from django import forms
-from .models import Event
+from .models import Event, EventBooker, Station
 from accounts.models import Mechanic
 import datetime
-
-
-TODAY = datetime.date.today()
-MONTHS = ['zero','January','February','March','April','May','June','July','August','September','October','November','December']
-CURRENT_MONTH = MONTHS[TODAY.month]
-
-# class DateInput(forms.DateInput):
-#     input_type = 'date'
-
-
-
+from django.db.transaction import atomic
 
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['car_id', 'car_model', 'services']
 
+
 class EventFormII(forms.ModelForm):
-    class Meta:
-        model = Event
-        fields = ['date']
+    date_start = forms.DateField(widget=forms.DateInput(format=('%d-%m-%Y')))
+    date_end = forms.DateField(widget=forms.DateInput(format=('%d-%m-%Y')))
+    time_start = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))
+    time_end = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))
 
-    date = forms.ChoiceField()
-
-
-    # def __init__(self, *args, **kwargs):
-    #     super(EventFormII, self).__init__(*args, **kwargs)
-    #     self.fields["date"].initial = 
-        
 class ManagerEventForm(forms.ModelForm):
     class Meta:
         model = Event
